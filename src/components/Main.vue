@@ -1,6 +1,6 @@
 <template>
    <div style="height: 100%">
-      <v-data-table class="pa-2" :items="rows" :headers="headers" :items-per-page="-1" hide-default-footer :elevation="4">
+      <v-data-table class="pa-2" dense :items="rows" :headers="headers" :items-per-page="-1" hide-default-footer :elevation="4">
          <template v-slot:top>
             <v-toolbar class="">
                <v-btn @click="addItem" class="d-none d-sm-flex mr-2"><v-icon left>mdi-plus-circle</v-icon>Agregar</v-btn>
@@ -31,16 +31,55 @@
          </template>
          <template v-slot:[`item.init`]="{ item }">
             <div class="d-flex align-center">
-               <v-text-field class="mx-2" reverse prefix="/pz" type="number" step="1" v-model="item.init">{{ item.init }}</v-text-field>
+               <v-text-field
+                  class="mx-2"
+                  reverse
+                  prefix="/pz"
+                  type="number"
+                  @focus="
+                     () => {
+                        item.init = '';
+                     }
+                  "
+                  @blur="
+                     () => {
+                        item.init = item.init == '' ? 0 : item.init;
+                     }
+                  "
+                  step="1"
+                  v-model="item.init"
+                  >{{ item.init }}</v-text-field
+               >
             </div>
          </template>
          <template v-slot:[`item.final`]="{ item }">
             <div class="d-flex align-center">
-               <v-text-field class="mx-2" reverse prefix="/pz" type="number" step="1" v-model="item.final">{{ item.final }}</v-text-field>
+               <v-text-field
+                  class="mx-2"
+                  reverse
+                  prefix="/pz"
+                  type="number"
+                  @focus="
+                     () => {
+                        item.final = '';
+                     }
+                  "
+                  @blur="
+                     () => {
+                        item.final = item.final == '' ? 0 : item.final;
+                     }
+                  "
+                  step="1"
+                  v-model="item.final"
+                  >{{ item.final }}</v-text-field
+               >
             </div>
          </template>
          <template v-slot:[`item.total`]="{ item }">
-            <p style="margin: 0"><v-icon x-small>mdi-currency-usd</v-icon>{{ calcRow(item) }}</p>
+            <div class="d-flex">
+               <p class="mb-0 mx-2"><v-icon x-small>mdi-currency-usd</v-icon>{{ calcRow(item) }}</p>
+               <p class="mb-0 mx-2"><v-icon x-small>mdi-logout-variant</v-icon>{{ calcRowDev(item) }}</p>
+            </div>
          </template>
          <template v-slot:[`item.actions`]="{ item }">
             <v-btn icon x-small @click="deleteItem(item)"><v-icon>mdi-close</v-icon></v-btn>
@@ -161,6 +200,9 @@ export default {
       },
       calcRow(item) {
          return ((item.init - item.final) * item.cost).toFixed(2);
+      },
+      calcRowDev(item) {
+         return (item.init - item.final).toFixed(0);
       },
       calcLoaded() {
          let loaded = 0;
