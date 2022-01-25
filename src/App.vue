@@ -1,60 +1,29 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
+   <v-app>
+      <v-app-bar>
+         <v-spacer></v-spacer>
+         <h2>Vuenice</h2>
+         <v-icon right>mdi-penguin</v-icon>
+         <v-spacer></v-spacer>
+      </v-app-bar>
+      <Main />
+      <v-footer>
+         <div class="d-flex justify-center align-center" style="width: 100%">
+            <p style="margin: 0">{{ new Date().getFullYear() }} —</p>
+            <v-icon small>mdi-copyright</v-icon>
+            <a href="http://jfourc.com" target="_blank" rel="noopener noreferrer">{{ "J4C" }}</a>
+         </div>
+      </v-footer>
+   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Main from "./components/Main.vue";
 
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
+   name: "App",
+   components: {
+      Main,
+   },
 };
 </script>
