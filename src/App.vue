@@ -1,6 +1,6 @@
 <template>
    <v-app>
-      <v-app-bar>
+      <v-app-bar color="grey darken-3">
          <v-spacer></v-spacer>
          <h2>Vuenice</h2>
          <v-icon right>mdi-penguin</v-icon>
