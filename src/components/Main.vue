@@ -1,5 +1,6 @@
 <template>
    <div style="height: 100%">
+      <Calculator ref="calc" />
       <v-data-table class="pa-2" dense :items="rows" :headers="headers" :items-per-page="-1" hide-default-footer :elevation="4">
          <template v-slot:top>
             <v-toolbar class="">
@@ -9,6 +10,8 @@
                <v-btn @click="clear" class="d-flex d-sm-none mr-2" icon small><v-icon small>mdi-eraser</v-icon></v-btn>
                <v-btn @click="reset" class="d-none d-sm-flex mr-2"><v-icon left>mdi-autorenew</v-icon>Reiniciar</v-btn>
                <v-btn @click="reset" class="d-flex d-sm-none mr-2" icon small><v-icon small>mdi-autorenew</v-icon></v-btn>
+               <v-btn @click="$refs.calc.show()" class="d-none d-sm-flex mr-2"><v-icon left>mdi-calculator-variant-outline</v-icon>Calculadora</v-btn>
+               <v-btn @click="$refs.calc.show()" class="d-flex d-sm-none mr-2" icon small><v-icon small>mdi-calculator-variant-outline</v-icon></v-btn>
             </v-toolbar>
          </template>
          <template v-slot:[`item.name`]="{ item }">
@@ -112,7 +115,12 @@
 </template>
 
 <script>
+import Calculator from "./Calculator.vue";
+
 export default {
+   components:{
+      Calculator
+   },
    name: "Main",
    data: () => ({
       headers: [
